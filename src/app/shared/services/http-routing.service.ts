@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HttpRoutingService {
  
-  apiUrl=environment.apiurl;
+  apiUrl=environment.apiUrl;
   /**
    * 
    * @param httpService Import HttpClient
