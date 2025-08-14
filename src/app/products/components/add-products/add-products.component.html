@@ -1,0 +1,55 @@
+<div class="main" fxLayoutAlign="center center">
+  <mat-card class="card" fxFlex="100%">
+    <div fxLayout="column" fxLayoutGap="20px">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <p class="header"> {{name}}</p>
+      </div>
+      <div>
+        <form *ngIf="productForm" [formGroup]="productForm">
+          <div fxLayout="column" fxLayoutGap="30px">
+            <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
+              <mat-form-field appearance="outline">
+                <mat-label>{{constantData.name}}</mat-label>
+                <input matInput type="text" formControlName="name">
+                <mat-error *ngIf="productForm?.get('name')?.hasError('required')">
+                  {{errorMessages.fieldRequired}}
+                </mat-error>
+                <mat-error *ngIf="productForm?.get('name')?.hasError('maxlength')">
+                  {{errorMessages.productNameExceed}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column" fxFlex="50%">
+              <mat-form-field appearance="outline">
+                <mat-label> {{constantData.price}} </mat-label>
+                <input matInput type="number" min="1" formControlName="price">
+                <mat-error *ngIf="productForm?.get('price')?.hasError('required')">
+                  {{errorMessages.sellingPriceReq}}
+                </mat-error>
+                <mat-error *ngIf="productForm?.get('price')?.hasError('max')">
+                  {{errorMessages.sellingPriceExceed}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="column" fxFlex="50%">
+              <mat-form-field appearance="outline">
+                <mat-label> {{constantData.description}}</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+                <mat-error *ngIf="productForm?.get('description')?.hasError('maxlength')">
+                  {{errorMessages.descriptionExceed}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="40px">
+              <button mat-raised-button style="background-color:white;color:#016f9b"
+                (click)="onBack()">{{constantData.back}}</button>
+              <button mat-raised-button [style.background-color]="isButtonDisabled ? '' : '#016f9b'"
+                [style.color]="'white'" (click)="onSave()" type="submit" [disabled]="isButtonDisabled">
+                {{update?constantData.update:constantData.save}}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-card>
+</div>
